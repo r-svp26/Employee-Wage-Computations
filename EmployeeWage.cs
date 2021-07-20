@@ -13,7 +13,7 @@ namespace EmployeeWageComputation
         int totalWage = 0;
 
         /// <summary>
-        /// This method is used to check whether employee is present or not.
+        /// This methed is used to evaluate the daily wage of an employee.
         /// </summary>
         public void dailyWage() 
         {
