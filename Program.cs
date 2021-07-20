@@ -7,7 +7,7 @@ namespace EmployeeWageComputation
         static void Main(string[] args)
         {
             EmployeeWage empWage = new EmployeeWage();
-            empWage.dailyWage();
+            empWage.monthWage();
         }
     }
 }
