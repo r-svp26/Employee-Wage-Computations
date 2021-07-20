@@ -16,18 +16,24 @@ namespace EmployeeWageComputation
         int empHrs = 0;
 
         /// <summary>
-        /// This method is used to evaluate the daily wage of a part time employee also.
+        /// In this method we have used the switch statement to evaluate daily wage of an employee.
         /// </summary>
         public void dailyWage() 
         {
             Random rd = new Random();
             int empCheck = rd.Next(0, 3);
-            if (empCheck == 2)
-                empHrs = 8;
-            else if (empCheck == 1)
-                empHrs = 4;
-            else
-                empHrs = 0;
+            switch (empCheck)
+            {
+                case 2:
+                    empHrs = 8;
+                    break;
+                case 1:
+                    empHrs = 4;
+                    break;
+                default:
+                    empHrs = 0;
+                    break;
+            }
             totalWage = EMP_RATE_PER_HR * empHrs;
             Console.WriteLine("Employee daily wage:" +totalWage);
         }
