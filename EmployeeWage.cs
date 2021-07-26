@@ -17,6 +17,7 @@ namespace EmployeeWageComputation
         int totalMonthlyWage = 0;
         int totalEmpHrs = 0;
         int totalWorkingDays = 0;
+
         /// <summary>
         /// This method is used to evaluate the monthly wage of an employee.
         /// </summary>
@@ -28,18 +29,12 @@ namespace EmployeeWageComputation
                 totalWorkingDays++;
                 Random rd = new Random();
                 int empCheck = rd.Next(0, 3);
-                switch (empCheck)
+                empHrs = empCheck switch
                 {
-                    case IS_FULL_TIME:
-                        empHrs = 8;
-                        break;
-                    case IS_PART_TIME:
-                        empHrs = 4;
-                        break;
-                    default:
-                        empHrs = 0;
-                        break;
-                }
+                    IS_FULL_TIME => 8,
+                    IS_PART_TIME => 4,
+                    _ => 0,
+                };
                 totalEmpHrs += empHrs;
             }
             totalMonthlyWage = totalEmpHrs * EMP_RATE_PER_HR;
