@@ -7,38 +7,48 @@ namespace EmployeeWageComputation
     class EmployeeWage
     {
         // constants
-        const int IS_PART_TIME = 1;
-        const int IS_FULL_TIME = 2;
-        const int EMP_RATE_PER_HR = 20;
-        const int MAX_WORKING_DAY = 20;
-        const int MAX_HRS_IN_MONTH = 100;
+        public const int IS_PART_TIME = 1;
+        public const int IS_FULL_TIME = 2;
+        
         // variables
-        int empHrs = 0;
-        int totalMonthlyWage = 0;
-        int totalEmpHrs = 0;
-        int totalWorkingDays = 0;
-
+        static int empHrs = 0;
+        static int totalEmpHrs = 0;
+        static int totalWorkingDays = 0;
+        static int totalEmpWage = 0;
         /// <summary>
-        /// This method is used to evaluate the monthly wage of an employee.
+        /// This method is used to evaluate the employee wage for multiple companies.
         /// </summary>
-        public void MonthWage() 
+        /// <param name="company"></param>
+        /// <param name="empRatePerHour"></param>
+        /// <param name="numOfWokingDays"></param>
+        /// <param name="maxHoursPerMonth"></param>
+        /// <returns>totalEmpWage</returns>
+        public static int ComputeEmpWage(string company, int empRatePerHour, int numOfWokingDays, int maxHoursPerMonth)
         {
-            while (totalEmpHrs < MAX_HRS_IN_MONTH &&
-                    totalWorkingDays < MAX_WORKING_DAY) 
+            while (totalEmpHrs < maxHoursPerMonth &&
+                    totalWorkingDays < numOfWokingDays)
             {
                 totalWorkingDays++;
                 Random rd = new Random();
                 int empCheck = rd.Next(0, 3);
-                empHrs = empCheck switch
+                switch (empCheck)
                 {
-                    IS_FULL_TIME => 8,
-                    IS_PART_TIME => 4,
-                    _ => 0,
-                };
+                    case IS_FULL_TIME:
+                    empHrs = 8;
+                    break;
+                    case IS_PART_TIME:
+                    empHrs = 4;
+                    break;
+                    default:
+                        empHrs = 0;
+                    break;
+                }
                 totalEmpHrs += empHrs;
+                Console.WriteLine("Day#:" + totalWorkingDays + " Emp Hr: " + empHrs);
             }
-            totalMonthlyWage = totalEmpHrs * EMP_RATE_PER_HR;
-            Console.WriteLine("Total monthly wage:" +totalMonthlyWage);
+            totalEmpWage = totalEmpHrs * empRatePerHour;
+            Console.WriteLine("Total Employee Wage for company " +company+ ":"+totalEmpWage);
+            return totalEmpWage;
         }
     }
 }
