@@ -20,7 +20,7 @@ namespace EmployeeWageComputation
         /// </summary>
         EmployeeWageComputation[] employeeWageComputation = new EmployeeWageComputation[3];
         /// <summary>
-        /// evaluate the company wage
+        /// evaluate the company wage. 
         /// </summary>
         /// <param name="company"></param>
         /// <param name="empRatePerHour"></param>
@@ -38,7 +38,7 @@ namespace EmployeeWageComputation
             numOfCompany++;
         }
         /// <summary>
-        /// calculate total wage for company
+        /// calculate total wage for mutliple companies.
         /// </summary>
         public void ComputeEmpWage()
         {
