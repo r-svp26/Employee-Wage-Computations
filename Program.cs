@@ -10,6 +10,7 @@ namespace EmployeeWageComputation
             employeeWageBuilder.AddCompanyEmpWage("DMart", 20, 10, 2);
             employeeWageBuilder.AddCompanyEmpWage("Reliance", 10, 4, 2);
             employeeWageBuilder.ComputeEmpWage();
+            Console.WriteLine($"Total wage for Reliance Company : {employeeWageBuilder.getTotalWage("Reliance")}");
         }
     }
 }

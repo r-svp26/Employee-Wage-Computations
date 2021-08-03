@@ -17,7 +17,8 @@ namespace EmployeeWageComputation
         public int numOfCompany = 0;
 
         public List<EmployeeWageComputation> companyEmpWageList = new List<EmployeeWageComputation>();
-        
+        public Dictionary<string, EmployeeWageComputation> companyEmpWageMap = new Dictionary<string, EmployeeWageComputation>();
+
         /// <summary>
         /// evaluate the company wage. 
         /// </summary>
@@ -39,10 +40,10 @@ namespace EmployeeWageComputation
                 Console.WriteLine(companyEmpWage.Result());
             }
         }
-        /// <summary>
-        /// This method is used to evaluate the employee wage for multiple companies.
-        /// </summary>
-        public int  ComputeEmpWage(EmployeeWageComputation employeeWageComputation)
+            /// <summary>
+            /// This method is used to evaluate the employee wage for multiple companies.
+            /// </summary>
+            public int  ComputeEmpWage(EmployeeWageComputation employeeWageComputation)
         {
             while (totalEmpHrs <  employeeWageComputation.maxHoursPerMonth &&
                     totalWorkingDays < employeeWageComputation.numOfWorkingDays)
@@ -69,10 +70,11 @@ namespace EmployeeWageComputation
             Console.WriteLine("Total Wage:" + totalEmpWage);
             return totalEmpWage;
         }
-
         public int GetTotalWage(string company)
         {
-            throw new NotImplementedException();
+            {
+               return this.companyEmpWageMap[company].totalWage;
+            }
         }
     }
 }
