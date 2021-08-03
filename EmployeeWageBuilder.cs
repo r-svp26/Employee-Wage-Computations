@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EmployeeWageComputation
 {
-    class EmployeeWageBuilder
+    class EmployeeWageBuilder : IEmployeeWageComputation
     {
         // constants
         public const int IS_PART_TIME = 1;
@@ -15,10 +15,9 @@ namespace EmployeeWageComputation
         public int totalWorkingDays = 0;
         public int totalEmpWage = 0;
         public int numOfCompany = 0;
-        /// <summary>
-        /// array initialization.
-        /// </summary>
-        EmployeeWageComputation[] employeeWageComputation = new EmployeeWageComputation[3];
+
+        public List<EmployeeWageComputation> companyEmpWageList = new List<EmployeeWageComputation>();
+        
         /// <summary>
         /// evaluate the company wage. 
         /// </summary>
@@ -26,26 +25,18 @@ namespace EmployeeWageComputation
         /// <param name="empRatePerHour"></param>
         /// <param name="numOfWorkingDays"></param>
         /// <param name="maxHoursPerMonth"></param>
-        public void AddCompanyWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) 
+        public void AddCompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) 
         {
-            employeeWageComputation[numOfCompany] = new EmployeeWageComputation()
-            {
-                CompanyName = company,
-                EmpRatePerHour = empRatePerHour,
-                NumOfWorkingDays = numOfWorkingDays,
-                MaxHoursPerMonth = maxHoursPerMonth
-            };
-            numOfCompany++;
+            EmployeeWageComputation companyEmpWage = new EmployeeWageComputation(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
+            companyEmpWageList.Add(companyEmpWage);
         }
-        /// <summary>
-        /// calculate total wage for mutliple companies.
-        /// </summary>
+
         public void ComputeEmpWage()
         {
-            for (int i = 0; i < numOfCompany; i++)
+            foreach (EmployeeWageComputation companyEmpWage in this.companyEmpWageList)
             {
-                employeeWageComputation[i].TotalEmpWage = ComputeEmpWage(employeeWageComputation[i]);
-                Console.WriteLine(employeeWageComputation[i]);
+                companyEmpWage.SetTotalEmpWage(this.ComputeEmpWage(companyEmpWage));
+                Console.WriteLine(companyEmpWage.Result());
             }
         }
         /// <summary>
@@ -53,8 +44,8 @@ namespace EmployeeWageComputation
         /// </summary>
         public int  ComputeEmpWage(EmployeeWageComputation employeeWageComputation)
         {
-            while (totalEmpHrs <  employeeWageComputation.MaxHoursPerMonth &&
-                    totalWorkingDays < employeeWageComputation.NumOfWorkingDays)
+            while (totalEmpHrs <  employeeWageComputation.maxHoursPerMonth &&
+                    totalWorkingDays < employeeWageComputation.numOfWorkingDays)
             {
                 totalWorkingDays++;
                 Random rd = new Random();
@@ -74,9 +65,14 @@ namespace EmployeeWageComputation
                 totalEmpHrs += empHrs;
                 Console.WriteLine("Day#:" + totalWorkingDays + " Emp Hr: " + empHrs);
             }
-            totalEmpWage = totalEmpHrs * employeeWageComputation.EmpRatePerHour;
+            totalEmpWage = totalEmpHrs * employeeWageComputation.empRatePerHour;
             Console.WriteLine("Total Wage:" + totalEmpWage);
             return totalEmpWage;
+        }
+
+        public int GetTotalWage(string company)
+        {
+            throw new NotImplementedException();
         }
     }
 }

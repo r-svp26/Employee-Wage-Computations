@@ -7,8 +7,8 @@ namespace EmployeeWageComputation
         static void Main(string[] args)
         {
             EmployeeWageBuilder employeeWageBuilder = new EmployeeWageBuilder();
-            employeeWageBuilder.AddCompanyWage("DMart", 20, 10, 2);
-            employeeWageBuilder.AddCompanyWage("Reliance", 10, 4, 2);
+            employeeWageBuilder.AddCompanyEmpWage("DMart", 20, 10, 2);
+            employeeWageBuilder.AddCompanyEmpWage("Reliance", 10, 4, 2);
             employeeWageBuilder.ComputeEmpWage();
         }
     }
