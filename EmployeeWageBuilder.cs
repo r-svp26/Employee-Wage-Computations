@@ -14,9 +14,11 @@ namespace EmployeeWageComputation
         public int totalEmpHrs = 0;
         public int totalWorkingDays = 0;
         public int totalEmpWage = 0;
+        public int dailyWage = 0;
         public int numOfCompany = 0;
 
         public List<EmployeeWageComputation> companyEmpWageList = new List<EmployeeWageComputation>();
+        public Dictionary<string, EmployeeWageComputation> companyEmpWageMap = new Dictionary<string, EmployeeWageComputation>();
         
         /// <summary>
         /// evaluate the company wage. 
@@ -29,6 +31,7 @@ namespace EmployeeWageComputation
         {
             EmployeeWageComputation companyEmpWage = new EmployeeWageComputation(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
             companyEmpWageList.Add(companyEmpWage);
+            companyEmpWageMap.Add(company,companyEmpWage);
         }
 
         public void ComputeEmpWage()
@@ -65,14 +68,11 @@ namespace EmployeeWageComputation
                 totalEmpHrs += empHrs;
                 Console.WriteLine("Day#:" + totalWorkingDays + " Emp Hr: " + empHrs);
             }
+            dailyWage = empHrs * employeeWageComputation.empRatePerHour;
+            Console.WriteLine("Daily Wage:" +dailyWage);
             totalEmpWage = totalEmpHrs * employeeWageComputation.empRatePerHour;
             Console.WriteLine("Total Wage:" + totalEmpWage);
             return totalEmpWage;
-        }
-
-        public int GetTotalWage(string company)
-        {
-            throw new NotImplementedException();
         }
     }
 }
